@@ -17,13 +17,12 @@ export default async function Home() {
     api_secret: process.env.CLOUDINARY_API_SECRET
   })
   const { resources }: { resources: Resource[] } = await cloudinary.api.resources()
-  console.log(resources);
+  // console.log(resources);
 
   return (
     <main>
       <h1>hi</h1>
       <ImageGalary resources={resources} />
-
     </main>
   );
 }

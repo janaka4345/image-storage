@@ -14,36 +14,34 @@ export default function ImageUploadFormSimpleBlob() {
         if (e.target.files?.[0]) {
             const newUrl = URL.createObjectURL(e.target.files?.[0])
             setUrl(newUrl)
-            console.log({ newUrl, url });
         }
 
     }
 
     async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        //     console.log(file)
+        console.log(file)
 
-        //     if (!file) return null
-        //     console.log('file', file)
+        if (!file) return null
 
         //     const newUrl = URL.createObjectURL(file)
         //     setUrl(newUrl)
         //     console.log({ newUrl, url });
 
 
-        // try {
-        //     const data = new FormData()
-        //     data.set('file', file)
-        //     const res = await fetch('/api/upload', {
-        //         method: 'POST',
-        //         body: data
-        //     })
-        //     console.log(res);
+        try {
+            const data = new FormData()
+            data.set('file', file)
+            const res = await fetch('/api/uploadToMongodb', {
+                method: 'POST',
+                body: data
+            })
+            console.log(res);
 
-        // } catch (error) {
-        //     console.log(error);
+        } catch (error) {
+            console.log(error);
 
-        // }
+        }
     }
     return (
         <>

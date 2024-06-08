@@ -13,11 +13,11 @@ const file:File=data.get('file') as File
 
   const bytes=await file.arrayBuffer()
   const buffer=Buffer.from(bytes)
-  // console.log(buffer);
+  console.log(buffer);
 
-  const path=join('/','temp',file.name)
-  await writeFile(path,buffer)
-  console.log(path);
+  // const path=join('/','temp',file.name)
+  // await writeFile(path,buffer)
+  // console.log(path);
   
 
   return NextResponse.json({message:'message'},{status:200})

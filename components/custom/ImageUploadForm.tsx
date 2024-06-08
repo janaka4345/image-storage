@@ -2,7 +2,7 @@
 import { z } from "zod"
 
 const formSchema = z.object({
-    file: z.string()
+    file: z.instanceof(File) | undefined
 })
 
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -26,7 +26,7 @@ export default function ImageUploadForm() {
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            file: "",
+            file: undefined,
         },
 
     })
@@ -36,19 +36,19 @@ export default function ImageUploadForm() {
         if (!values.file) return
         console.log(values.file)
 
-        try {
-            const data = new FormData()
-            data.set('file', values.file)
-            const res = await fetch('/api/upload', {
-                method: 'POST',
-                body: data
-            })
-            console.log(res);
+        // try {
+        const data = new FormData()
+        data.set('file', values.file)
+        const res = await fetch('/api/upload', {
+            method: 'POST',
+            body: data
+        })
+        console.log(res);
 
-        } catch (error) {
-            console.log(error);
+        // } catch (error) {
+        //     console.log(error);
 
-        }
+        // }
     }
     return (
         <Form {...form}>

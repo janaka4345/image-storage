@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { FormEvent, useState } from "react"
 
-export default function ImageUploadForm() {
+export default function ImageUploadFormSimple() {
     const [file, setFile] = useState<File>()
 
     async function handleSubmit(e: FormEvent<HTMLFormElement>) {

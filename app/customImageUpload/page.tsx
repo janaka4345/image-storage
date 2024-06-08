@@ -1,11 +1,12 @@
-import ImageUploadForm from "@/components/custom/ImageUploadFormSimple"
+import ImageUploadForm from "@/components/custom/ImageUploadForm"
+import ImageUploadFormSimple from "@/components/custom/ImageUploadFormSimple"
 
 
 const page = () => {
     return (
         <div>
             {/* <ImageUploadForm /> */}
-            <ImageUploadForm />
+            <ImageUploadFormSimple />
         </div>
     )
 }

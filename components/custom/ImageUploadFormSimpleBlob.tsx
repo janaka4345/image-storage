@@ -2,25 +2,33 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
-import { FormEvent, useState } from "react"
+import { ChangeEvent, FormEvent, useState } from "react"
 
 export default function ImageUploadFormSimpleBlob() {
     const [file, setFile] = useState<Blob>()
     const [url, setUrl] = useState<string | null>(null)
-    console.log('hi');
+
+    const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault()
+        setFile(e.target.files?.[0])
+        if (e.target.files?.[0]) {
+            const newUrl = URL.createObjectURL(e.target.files?.[0])
+            setUrl(newUrl)
+            console.log({ newUrl, url });
+        }
+
+    }
 
     async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        console.log(file)
+        //     console.log(file)
 
+        //     if (!file) return null
+        //     console.log('file', file)
 
-
-        if (!file) return null
-        console.log('file', file)
-
-        const newUrl = URL.createObjectURL(file)
-        setUrl(newUrl)
-        console.log({ newUrl, url });
+        //     const newUrl = URL.createObjectURL(file)
+        //     setUrl(newUrl)
+        //     console.log({ newUrl, url });
 
 
         // try {
@@ -39,9 +47,9 @@ export default function ImageUploadFormSimpleBlob() {
     }
     return (
         <>
-            {url && <Image src={url} alt='image' width={100} height={100} />}
+            {url && <Image className="w-[100px] h-[100px] object-cover" src={url} alt='image' width={100} height={100} />}
             <form onSubmit={handleSubmit}>
-                <Input type="file" name='file' onChange={(e) => { setFile(e.target.files?.[0]) }}></Input>
+                <Input type="file" name='file' onChange={(e) => handleChange(e)}></Input>
                 <Button type="submit">upload image</Button>
             </form>
         </>
